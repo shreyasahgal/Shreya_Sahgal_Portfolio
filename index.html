@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Portfolio | Dark Theme</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        dark: '#0f172a',
+                        darker: '#020617'
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'float-reverse': 'float-reverse 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        'float-reverse': {
+                            '0%, 100%': { transform: 'translateY(-10px)' },
+                            '50%': { transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3B82F6;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2563eb;
+        }
+
+        /* Custom animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+
+        /* Blob effect */
+        .blob {
+            filter: blur(50px);
+            opacity: 0.4;
+            position: absolute;
+            z-index: -1;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="bg-darker text-gray-300 font-sans antialiased overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-dark/90 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="flex items-center space-x-2">
+                        <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+                            <span class="text-white font-bold">SS</span>
+                        </div>
+                        <span class="text-white font-bold text-lg">Shreya Sahgal</span>
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="text-primary hover:text-primary/80 px-3 py-2 rounded-md text-sm font-medium transition">Home</a>
+                        <a href="#about" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">About</a>
+                        <a href="#skills" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Skills</a>
+                        <a href="#projects" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Projects</a>
+                        <a href="#contact" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Contact</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-800 transition">
+                        <i class="fas fa-moon text-white"></i>
+                    </button>
+                    <div class="md:hidden">
+                        <button id="mobile-menu-button" class="p-2 rounded-md hover:bg-gray-800 transition">
+                            <i class="fas fa-bars text-white"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-dark border-t border-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="text-primary block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="#about" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="#skills" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Skills</a>
+                <a href="#projects" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</a>
+                <a href="#contact" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6 fade-in">
+                    <h1 class="text-4xl md:text-6xl font-bold text-white">
+                        Hi, I'm <span class="text-primary">Shreya Sahgal</span>
+                    </h1>
+                    <h2 class="text-2xl md:text-3xl font-semibold text-gray-400">
+                        Full Stack Web Developer
+                    </h2>
+                    <p class="text-lg text-gray-400 max-w-lg">
+                        I build exceptional digital experiences that are fast, accessible, and visually appealing.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#contact" class="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-medium transition transform hover:scale-105">
+                            Contact Me
+                        </a>
+                        <a href="#projects" class="border border-primary text-primary hover:bg-primary/10 px-6 py-3 rounded-lg font-medium transition transform hover:scale-105">
+                            View Work
+                        </a>
+                    </div>
+                    <div class="flex space-x-4 pt-4">
+                        <a href="https://github.com/shreyasahgal" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-github text-2xl"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/shreya-sahgal-674341250/" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-linkedin text-2xl"></i>
+                        </a>
+                
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-instagram text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="relative fade-in delay-200">
+                    <div class="relative w-full max-w-md mx-auto">
+                        <div class="absolute -top-8 -left-8 w-32 h-32 bg-purple-500 rounded-full blob"></div>
+                        <div class="absolute -bottom-8 -right-8 w-40 h-40 bg-blue-500 rounded-full blob"></div>
+                        <div class="relative">
+                            <img src = "https://imglink.io/i/7fbf7a82-fa72-4902-af78-d16379843b42.jpg" 
+                                 alt="Profile" 
+                                 class="rounded-2xl border-2 border-primary/50 shadow-2xl w-full max-w-md mx-auto">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-white">
+                    <span class="text-primary">About</span> Me
+                </h2>
+                <div class="w-20 h-1 bg-primary mx-auto mt-4"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="fade-in delay-200">
+                    <h3 class="text-2xl font-bold text-white mb-6">About Me </h3>
+                    <p class="text-gray-400 mb-4">
+                        I’m currently pursuing my B.Tech in Computer Science Engineering at Amity University. 
+                        I’m passionate about building user-friendly and scalable web applications. 
+                       
+                        
+                    </p>
+                    <p class="text-gray-400 mb-4">
+                         With hands-on experience in MERN, I love turning ideas into interactive digital solutions and am always eager to learn and innovate. 
+                    </p>
+                    <p class="text-gray-400 mb-6">
+                        Seeking to leverage my coding skills and gain hands-on experience in software development by contributing to real-world projects under the mentorship of experienced software engineers.
+                    </p>
+                    
+                </div>
+                <div class="grid grid-cols-2 gap-4 fade-in delay-300">
+                    <div class="bg-darker p-6 rounded-xl border border-gray-800 hover:border-primary/50 transition group">
+                        <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition">
+                            <i class="fas fa-code text-primary text-xl"></i>
+                        </div>
+                        <h4 class="text-white font-medium mb-2">Web Development</h4>
+                        <p class="text-gray-400 text-sm">Building modern web applications with latest technologies</p>
+                    </div>
+                    <div class="bg-darker p-6 rounded-xl border border-gray-800 hover:border-primary/50 transition group">
+                        <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition">
+                            <i class="fas fa-mobile-alt text-primary text-xl"></i>
+                        </div>
+                        <h4 class="text-white font-medium mb-2">Responsive Design</h4>
+                        <p class="text-gray-400 text-sm">Creating flawless experiences across all devices</p>
+                    </div>
+                    <div class="bg-darker p-6 rounded-xl border border-gray-800 hover:border-primary/50 transition group">
+                        <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition">
+                            <i class="fas fa-bolt text-primary text-xl"></i>
+                        </div>
+                        <h4 class="text-white font-medium mb-2">Performance</h4>
+                        <p class="text-gray-400 text-sm">Optimizing for speed and efficiency</p>
+                    </div>
+                    <div class="bg-darker p-6 rounded-xl border border-gray-800 hover:border-primary/50 transition group">
+                        <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition">
+                            <i class="fas fa-server text-primary text-xl"></i>
+                        </div>
+                        <h4 class="text-white font-medium mb-2">Backend</h4>
+                        <p class="text-gray-400 text-sm">Developing robust APIs and server-side logic</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-white">
+                    My <span class="text-primary">Skills</span>
+                </h2>
+                <div class="w-20 h-1 bg-primary mx-auto mt-4"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="fade-in delay-200">
+                    <h3 class="text-2xl font-bold text-white mb-6">Technologies I Work With</h3>
+                    <p class="text-gray-400 mb-8">
+                        I've worked with a variety of technologies in the web development world. 
+                        From front-end to back-end, I'm always expanding my skillset.
+                    </p>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">HTML/CSS</span>
+                                <span class="text-primary">95%</span>
+                            </div>
+                            <div class="w-full bg-gray-800 rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">JavaScript</span>
+                                <span class="text-primary">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-800 rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">React.js</span>
+                                <span class="text-primary">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-800 rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">Node.js/Express.js</span>
+                                <span class="text-primary">98%</span>
+                            </div>
+                            <div class="w-full bg-gray-800 rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 98%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-in delay-300">
+                    <h3 class="text-2xl font-bold text-white mb-6">Other Skills</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <div class="px-4 py-2 bg-dark rounded-full border border-gray-800 text-sm text-gray-300 hover:bg-primary/10 hover:border-primary/50 hover:text-primary transition">Java</div>
+                        <div class="px-4 py-2 bg-dark rounded-full border border-gray-800 text-sm text-gray-300 hover:bg-primary/10 hover:border-primary/50 hover:text-primary transition">C</div>
+                        <div class="px-4 py-2 bg-dark rounded-full border border-gray-800 text-sm text-gray-300 hover:bg-primary/10 hover:border-primary/50 hover:text-primary transition">MongoDB</div>
+                        <div class="px-4 py-2 bg-dark rounded-full border border-gray-800 text-sm text-gray-300 hover:bg-primary/10 hover:border-primary/50 hover:text-primary transition">Docker</div>
+                        <div class="px-4 py-2 bg-dark rounded-full border border-gray-800 text-sm text-gray-300 hover:bg-primary/10 hover:border-primary/50 hover:text-primary transition">GIT</div>
+                        <div class="px-4 py-2 bg-dark rounded-full border border-gray-800 text-sm text-gray-300 hover:bg-primary/10 hover:border-primary/50 hover:text-primary transition">GitHub</div>
+                        <div class="px-4 py-2 bg-dark rounded-full border border-gray-800 text-sm text-gray-300 hover:bg-primary/10 hover:border-primary/50 hover:text-primary transition">REST APIs</div>
+                        <div class="px-4 py-2 bg-dark rounded-full border border-gray-800 text-sm text-gray-300 hover:bg-primary/10 hover:border-primary/50 hover:text-primary transition">OOPS</div>
+                        <div class="px-4 py-2 bg-dark rounded-full border border-gray-800 text-sm text-gray-300 hover:bg-primary/10 hover:border-primary/50 hover:text-primary transition">Networking</div>
+                        <div class="px-4 py-2 bg-dark rounded-full border border-gray-800 text-sm text-gray-300 hover:bg-primary/10 hover:border-primary/50 hover:text-primary transition">Database Management</div>
+                        <div class="px-4 py-2 bg-dark rounded-full border border-gray-800 text-sm text-gray-300 hover:bg-primary/10 hover:border-primary/50 hover:text-primary transition">SQL</div>
+                        <div class="px-4 py-2 bg-dark rounded-full border border-gray-800 text-sm text-gray-300 hover:bg-primary/10 hover:border-primary/50 hover:text-primary transition">Operating System</div>
+                    </div>
+                    <div class="mt-8">
+                        <h3 class="text-2xl font-bold text-white mb-6">Experience</h3>
+                        <div class="space-y-6">
+                            <div class="bg-dark p-6 rounded-xl border border-gray-800 hover:border-primary/50 transition">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h4 class="text-white font-medium">Embedded Software Intern</h4>
+                                        <p class="text-gray-400">Schneider Electric</p>
+                                    </div>
+                                    <span class="px-3 py-1 bg-primary/10 text-primary text-xs rounded-full">May 2025 - July 2025</span>
+                                </div>
+                                <p class="text-gray-400 mt-3 text-sm">
+                                    Implemented 7 stages of the Mender deployment lifecycle using Bash scripting, embedding custom logic for automated
+ updates and robust error recovery.
+                                </p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-white">
+                    My <span class="text-primary">Projects</span>
+                </h2>
+                <div class="w-20 h-1 bg-primary mx-auto mt-4"></div>
+                <p class="text-gray-400 mt-6 max-w-2xl mx-auto">
+                    Here are some of my recent projects. Each one was built to solve a specific problem or explore new technologies.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="bg-darker rounded-xl overflow-hidden border border-gray-800 hover:border-primary/50 transition group fade-in delay-200">
+                    <div class="relative overflow-hidden h-60">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" 
+                             alt="Project 1" 
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition"></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-bold text-white"> Time-Aware RF Model for Solar Power Forecasting </h3>
+                            <div class="flex space-x-2">
+                                <a href="https://colab.research.google.com/drive/1T4lLAmY-vyPtD7INsR_OyUSwhAlHpo3w?usp=sharing" class="text-gray-400 hover:text-primary transition">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                
+                            </div>
+                        </div>
+                        <p class="text-gray-400 mb-4">
+                            Developed a Random Forest Regression Model for AC power forecasting ,improving accuracy by 67% over standard models in monsoon conditions
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-dark text-xs text-gray-300 rounded">Python</span>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="bg-darker rounded-xl overflow-hidden border border-gray-800 hover:border-primary/50 transition group fade-in delay-300">
+                    <div class="relative overflow-hidden h-60">
+                        <img src="https://imglink.io/i/8059e661-369f-4477-91f1-76a586711d9a.jpg" alt="computer-laptop-programming-web-developing-front-end-web-developing-mix-media-background-2FM20K1.jpg">" 
+                             alt="Project 2" 
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition"></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-bold text-white"> Real-Time CI/CD Workflow Simulator</h3>
+                            <div class="flex space-x-2">
+                                <a href="https://github.com/shreyasahgal" class="text-gray-400 hover:text-primary transition">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                
+                            </div>
+                        </div>
+                        <p class="text-gray-400 mb-4">
+                             Interactive CI/CD Pipeline Simulator web app that enables users to design, visualize, and simulate
+ complete DevOps workflows
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-dark text-xs text-gray-300 rounded">React.js</span>
+                            <span class="px-2 py-1 bg-dark text-xs text-gray-300 rounded">Node.js</span>
+                            <span class="px-2 py-1 bg-dark text-xs text-gray-300 rounded">Docker</span>
+                            <span class="px-2 py-1 bg-dark text-xs text-gray-300 rounded">YAML Parser</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="bg-darker rounded-xl overflow-hidden border border-gray-800 hover:border-primary/50 transition group fade-in delay-400">
+                    <div class="relative overflow-hidden h-60">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" 
+                             alt="Project 3" 
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition"></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-bold text-white">NGOConnect– Volunteer and Donation Management Platform</h3>
+                            <div class="flex space-x-2">
+                                <a href="https://github.com/shreyasahgal" class="text-gray-400 hover:text-primary transition">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="#" class="text-gray-400 hover:text-primary transition">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 mb-4">
+                             Designed a dynamic web platform enabling NGOs to efficiently manage volunteer onboarding, coordinate events, and
+ monitor donations through a seamless interface
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-dark text-xs text-gray-300 rounded">React.js</span>
+                            <span class="px-2 py-1 bg-dark text-xs text-gray-300 rounded">MongoDB</span>
+                            <span class="px-2 py-1 bg-dark text-xs text-gray-300 rounded">Express.js</span>
+                            <span class="px-2 py-1 bg-dark text-xs text-gray-300 rounded">Node.js</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12 fade-in delay-500">
+                <a href="https://github.com/shreyasahgal" class="inline-flex items-center px-6 py-3 border border-primary text-primary hover:bg-primary/10 rounded-lg font-medium transition">
+                    View All Projects
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 fade-in">
+      <h2 class="text-3xl md:text-4xl font-bold text-white">
+        Get In <span class="text-primary">Touch</span>
+      </h2>
+      <div class="w-20 h-1 bg-primary mx-auto mt-4"></div>
+      <p class="text-gray-400 mt-6 max-w-2xl mx-auto">
+        Have a project in mind or want to discuss potential opportunities? Feel free to reach out!
+      </p>
+    </div>
+
+    <!-- Center this container -->
+    <div class="flex justify-center">
+      <div class="fade-in delay-300 max-w-xl w-full">
+        <div class="bg-dark p-8 rounded-xl border border-gray-800 h-full">
+          <h3 class="text-2xl font-bold text-white mb-6">Contact Information</h3>
+          <div class="space-y-6">
+            <div class="flex items-start space-x-4">
+              <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                <i class="fas fa-envelope text-primary"></i>
+              </div>
+              <div>
+                <h4 class="text-gray-300 font-medium">Email</h4>
+                <a href="mailto:shreyasahgal16@gmail.com" class="text-gray-400 hover:text-primary transition">
+                  shreyasahgal16@gmail.com
+                </a>
+              </div>
+            </div>
+            <div class="flex items-start space-x-4">
+              <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                <i class="fas fa-phone-alt text-primary"></i>
+              </div>
+              <div>
+                <h4 class="text-gray-300 font-medium">Phone</h4>
+                <a href="tel:+919999887291" class="text-gray-400 hover:text-primary transition">+91 9999887291</a>
+              </div>
+            </div>
+            <div class="flex items-start space-x-4">
+              <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                <i class="fas fa-map-marker-alt text-primary"></i>
+              </div>
+              <div>
+                <h4 class="text-gray-300 font-medium">Location</h4>
+                <p class="text-gray-400">New Delhi</p>
+              </div>
+            </div>
+          </div>
+          <div class="mt-12">
+            <h4 class="text-gray-300 font-medium mb-4">Follow Me</h4>
+            <div class="flex space-x-4">
+              <a href="https://github.com/shreyasahgal" class="w-10 h-10 rounded-full bg-dark border border-gray-800 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary/50 transition">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="https://www.linkedin.com/in/shreya-sahgal-674341250/" class="w-10 h-10 rounded-full bg-dark border border-gray-800 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary/50 transition">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a href="#" class="w-10 h-10 rounded-full bg-dark border border-gray-800 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary/50 transition">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    <!-- Footer -->
+    <footer class="bg-dark py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+                        <span class="text-white font-bold">SS</span>
+                    </div>
+                    <span class="text-white font-bold text-lg">Shreya Sahgal</span>
+                </div>
+                <div class="text-gray-400 text-sm">
+                    © 2025 Shreya Sahgal. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white shadow-lg opacity-0 invisible transition-all duration-300">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            const icon = themeToggle.querySelector('i');
+            
+            if (html.classList.contains('dark')) {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            } else {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        });
+
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeIn');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        fadeElements.forEach(element => {
+            fadeInObserver.observe(element);
+        });
+    </script>
+</body>
+</html>
